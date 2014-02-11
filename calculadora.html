@@ -13,9 +13,44 @@
 		<script>
 			/* Não sei como fazer, toh pensando ainda em como fazer da maneira mais simples possível. Aceito sugestões. */
 			
-			var operacao = '';
+			var operacaoAtual = '';
+			var numeros = new Array();
 			
-			
+			function addNum()
+			{
+				var numero = parseInt(display.innerHTML);
+				numeros.push(numero);
+				display.innerHTML = '0';
+			}
+			function somar()
+			{
+				var resultado = 0;
+				for (i in numeros)
+				{
+					resultado += numeros[1];
+				}
+				display.innerHTML = resultado;
+			}
+			function setOperacao(operacao)
+			{
+				addNum();
+				operacaoAtual = operacao;
+			}
+			function getOperacao()
+			{
+				addNum();
+				switch(operacaoAtual)
+				{
+					case "soma":
+						somar();
+						break;
+					case "subtracao":
+						subtrair();
+						break;
+					default:
+						'';
+				}
+			}
 			function incNum(num)
 			{
 				if (display.innerHTML == '0')
@@ -24,7 +59,11 @@
 			}
 			function ce()
 			{
+				//limpando display
 				display.innerHTML = 0;
+				
+				//limpando array numeros
+				numeros.length = 0;
 			}
 			window.onload = function()
 			{
@@ -43,6 +82,8 @@
 						botoes[i].setAttribute('onClick', 'incNum(this.innerHTML)');
 					}
 				}
+				document.querySelector('#soma').setAttribute('onClick', 'setOperacao("soma")');
+				document.querySelector('#resultado').setAttribute('onClick', 'getOperacao()');
 			}
 		</script>
 	</head>
@@ -57,7 +98,7 @@
 					<th><span class="btn-calc" id="<--"><--</span></th>
 					<th><span class="btn-calc" id="ce">CE</span></th>
 					<th><span class="btn-calc" id="c">C</span></th>
-					<th><span class="btn-calc" id="+">+/-</span></th>
+					<th><span class="btn-calc" id="maisoumenos">+/-</span></th>
 					<th><span class="btn-calc" id="sqrt">Sqrt</span></th>
 				</tr>
 				<tr>
@@ -79,12 +120,12 @@
 					<th><span class="btn-calc" id="">2</span></th>
 					<th><span class="btn-calc" id="">3</span></th>
 					<th><span class="btn-calc" id="">-</span></th>
-					<th rowspan="2"><span class="btn-calc" id="">=</span></th>
+					<th rowspan="2"><span class="btn-calc" id="resultado">=</span></th>
 				</tr>
 				<tr>
 					<th colspan="2"><span class="btn-calc" id="">0</span></th>
 					<th><span class="btn-calc" id="">,</span></th>
-					<th><span class="btn-calc" id="">+</span></th>
+					<th><span class="btn-calc" id="soma">+</span></th>
 				</tr>
 			</table>
 		</center>
