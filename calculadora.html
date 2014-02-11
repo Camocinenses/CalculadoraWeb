@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf8"/>
+		<title>Calculadora</title>
+		<style>
+			body {font-family: arial;}
+			#display {display: block; text-align: right; padding: 10px;}
+			.btn-calc {cursor: pointer; display: block; padding: 10px;}
+			.btn-calc:active {background: orange; color: white;}
+			.btn-calc:hover {background: gray; color: white;}
+		</style>
+		<script>
+			/* Não sei como fazer, toh pensando ainda em como fazer da maneira mais simples possível. Aceito sugestões. */
+			var operacao;
+			var numeros = new Array();
+			
+			function incNum(num)
+			{
+				if (display.innerHTML == '0')
+					display.innerHTML = '';
+				display.innerHTML += num;
+			}
+			function ce()
+			{
+				display.innerHTML = 0;
+			}
+			window.onload = function()
+			{
+				var display = document.querySelector('#display');
+				
+				var btn_ce = document.querySelector('#ce');
+				btn_ce.setAttribute('onClick', 'ce()');
+				
+				/* Pegando todos os elementos html que tenham a classe btn-calc em forma de array */
+				var botoes = document.querySelectorAll('.btn-calc');
+				for (i in botoes)
+				{
+					/* Se o que tiver contido na classe atual for um numero, seto um atributo onclick para a função incNum(num) */
+					if (isFinite(botoes[i].innerHTML))
+					{
+						botoes[i].setAttribute('onClick', 'incNum(this.innerHTML)');
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!-- O modelo de organização dos botões eu peguei da calculadora padrão do windows 7. -->
+		<center>
+			<table border="1">
+				<tr>
+					<th colspan="5"><span id="display">0</span></th>
+				</tr>
+				<tr>
+					<th><span class="btn-calc" id="<--"><--</span></th>
+					<th><span class="btn-calc" id="ce">CE</span></th>
+					<th><span class="btn-calc" id="c">C</span></th>
+					<th><span class="btn-calc" id="+">+/-</span></th>
+					<th><span class="btn-calc" id="sqrt">Sqrt</span></th>
+				</tr>
+				<tr>
+					<th><span class="btn-calc" id="">7</span></th>
+					<th><span class="btn-calc" id="">8</span></th>
+					<th><span class="btn-calc" id="">9</span></th>
+					<th><span class="btn-calc" id="">/</span></th>
+					<th><span class="btn-calc" id="">%</span></th>
+				</tr>
+				<tr>
+					<th><span class="btn-calc" id="">4</span></th>
+					<th><span class="btn-calc" id="">5</span></th>
+					<th><span class="btn-calc" id="">6</span></th>
+					<th><span class="btn-calc" id="">*</span></th>
+					<th><span class="btn-calc" id="">1/x</span></th>
+				</tr>
+				<tr>
+					<th><span class="btn-calc" id="">1</span></th>
+					<th><span class="btn-calc" id="">2</span></th>
+					<th><span class="btn-calc" id="">3</span></th>
+					<th><span class="btn-calc" id="">-</span></th>
+					<th rowspan="2"><span class="btn-calc" id="">=</span></th>
+				</tr>
+				<tr>
+					<th colspan="2"><span class="btn-calc" id="">0</span></th>
+					<th><span class="btn-calc" id="">,</span></th>
+					<th><span class="btn-calc" id="">+</span></th>
+				</tr>
+			</table>
+		</center>
+	</body>
+</html>
